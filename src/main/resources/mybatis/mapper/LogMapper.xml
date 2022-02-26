@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emo.mapper.LogMapper">
+
+    <insert id="addLog" parameterType="com.emo.pojo.Syslog">
+        insert into emo.syslog(id, name, account, time, content, requestIp)
+        values (#{id}, #{name}, #{account}, #{time}, #{content}, #{requestIp})
+    </insert>
+
+    <select id="selectLogInfo" resultType="com.emo.pojo.Syslog">
+        select *
+        from emo.syslog
+        order by time desc
+        limit #{page}, #{limit}
+    </select>
+    <select id="showCount" resultType="java.lang.Integer">
+        select count(*)
+        from emo.syslog
+    </select>
+
+
+
+</mapper>

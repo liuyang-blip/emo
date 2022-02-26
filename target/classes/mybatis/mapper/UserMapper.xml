@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emo.mapper.UserMapper">
+    <!--添加管理员-->
+    <insert id="addUser" parameterType="com.emo.pojo.User">
+       insert into emo.user(u_id,username,password,sex,phonenum) VALUES
+        (#{u_id},#{username},#{password},#{sex},#{phonenum})
+    </insert>
+    <!--修改管理员信息-->
+    <update id="updateUser" parameterType="com.emo.pojo.User">
+        update emo.user set
+        username=#{username},password=#{password},phonenum=#{phonenum}
+        where u_id=#{u_id}
+    </update>
+    <!--删除管理员信息-->
+    <delete id="deleteUser" parameterType="com.emo.pojo.User">
+        delete from emo.user
+        where u_id=#{u_id}
+    </delete>
+    <!--登录-->
+    <select id="Login" resultType="com.emo.pojo.User">
+        select * from emo.user
+        where username=#{username}
+        and password=#{password}
+    </select>
+    <select id="selectUser" resultType="com.emo.pojo.User">
+        select * from emo.user
+        limit #{page},#{limit}
+    </select>
+</mapper>

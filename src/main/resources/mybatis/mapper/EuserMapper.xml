@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emo.mapper.EuserMapper">
+    <!--添加wx用户-->
+    <insert id="addEuser" parameterType="com.emo.pojo.Euser">
+        insert into emo.e_user(e_id, e_username, e_sex, e_num,e_head,vx_id) VALUES
+        (#{e_id},#{e_username},#{e_sex},#{e_num},#{e_head},#{vx_id})
+    </insert>
+    <!--更改wx用户-->
+    <update id="updateEuser" parameterType="com.emo.pojo.Euser">
+        update emo.e_user set
+        e_username=#{e_username},e_num=#{e_num},e_head=#{e_head}
+        where e_id=#{e_id}
+    </update>
+    <!--删除wx用户-->
+    <delete id="deleteEuser" parameterType="com.emo.pojo.Euser">
+        delete from emo.e_user
+        where e_id=#{e_id}
+    </delete>
+    <!--查看wx用户-->
+    <select id="selectEuser" resultType="com.emo.pojo.Euser">
+        select * from emo.e_user
+        <where>
+            <if test="Keyword!=null">
+                and concat_ws(" ",e_username,vx_id) regexp #{Keyword}
+            </if>
+        </where>
+        limit #{page},#{limit}
+    </select>
+    <!--关键字查看wx用户-->
+    <select id="selectWhereEuser" resultType="com.emo.pojo.Euser">
+        select * from emo.e_user
+    </select>
+    <select id="selectEuserid" resultType="com.emo.pojo.Euser">
+        select * from emo.e_user
+        where vx_id=#{vx_id}
+    </select>
+</mapper>

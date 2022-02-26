@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emo.mapper.EmoTextMapper">
+    <!--添加测试题-->
+    <insert id="addText" parameterType="com.emo.pojo.Emotext">
+        insert into emo.emotext(id, content, answer, rightanswer, erroranswer, score) VALUES
+        (#{id},#{content},#{answer},#{rightanswer},#{erroranswer},#{score})
+    </insert>
+    <!--批量添加测试题-->
+    <insert id="addAllText" parameterType="com.emo.pojo.Emotext">
+        insert into emo.emotext(id, content, answer, rightanswer, erroranswer, score) VALUES
+                (#{id},#{content},#{answer},#{rightanswer},#{erroranswer},#{score})
+    </insert>
+    <!--更改测试题-->
+    <update id="updateText" parameterType="com.emo.pojo.Emotext">
+        update emo.emotext set
+        content=#{content},answer=#{answer},rightanswer=#{rightanswer},erroranswer=#{erroranswer},score=#{score}
+        where id=#{id}
+    </update>
+    <!--删除测试题-->
+    <delete id="deleteText" parameterType="com.emo.pojo.Emotext">
+        delete from emo.emotext
+        where id=#{id}
+    </delete>
+    <!--查看测试题-->
+    <select id="selectText" resultType="com.emo.pojo.Emotext">
+        select * from emo.emotext
+        limit #{page},#{limit}
+    </select>
+</mapper>

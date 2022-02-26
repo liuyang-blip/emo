@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emo.mapper.MusicMapper">
+    <!--添加音乐-->
+    <insert id="addMusic" parameterType="com.emo.pojo.Music">
+        insert into emo.music(id, mold, music) VALUES
+        (#{id},#{mold},#{music})
+    </insert>
+    <!--修改音乐-->
+    <update id="updateMusic" parameterType="com.emo.pojo.Music">
+        update emo.music set
+        mold=#{mold}
+        where id=#{id}
+    </update>
+    <!--删除音乐-->
+    <delete id="deleteMusic" parameterType="com.emo.pojo.Music">
+        delete from emo.music
+        where id=#{id}
+    </delete>
+    <!--查看音乐-->
+    <select id="selectMusic" resultType="com.emo.pojo.Music">
+        select * from emo.music
+        <where>
+            <if test="Keyword!=null">
+               and concat_ws(" ",mold,music) regexp #{Keyword}
+            </if>
+        </where>
+        limit #{page},#{limit}
+    </select>
+    <!--关键字查看音乐-->
+    <select id="selectWhereMusic" resultType="com.emo.pojo.Music">
+        select * from emo.music
+    </select>
+</mapper>

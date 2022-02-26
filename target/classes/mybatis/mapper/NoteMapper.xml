@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emo.mapper.NoteMapper">
+    <!--添加树洞小纸条-->
+    <insert id="addNote" parameterType="com.emo.pojo.Note">
+        insert into emo.note(id, title) VALUES
+        (#{id},#{title})
+    </insert>
+    <!--更改树洞小纸条-->
+    <update id="updataNote" parameterType="com.emo.pojo.Note">
+        update emo.note set
+        title=#{title}
+        where id=#{id}
+    </update>
+    <!--删除树洞小纸条-->
+    <delete id="deleteNote" parameterType="com.emo.pojo.Note">
+        delete from emo.note
+            where id=#{id}
+    </delete>
+    <!--查找树洞小纸条-->
+    <select id="selectNote" resultType="com.emo.pojo.Note">
+        select * from emo.note
+        limit #{page},#{limit}
+    </select>
+</mapper>

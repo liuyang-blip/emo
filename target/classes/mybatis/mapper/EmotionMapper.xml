@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emo.mapper.EmotionMapper">
+    <!--添加情绪小妙招-->
+    <insert id="addEmotion" parameterType="com.emo.pojo.Emotion">
+        insert into emo.emotion(id, title, concent) VALUES
+        (#{id},#{title},#{concent})
+    </insert>
+    <!--更改情绪小妙招-->
+    <update id="updateEmotion" parameterType="com.emo.pojo.Emotion">
+        update emo.emotion set
+        title=#{title},concent=#{concent}
+            where id=#{id}
+    </update>
+    <!--删除情绪小妙招-->
+    <delete id="deleteEmotion" parameterType="com.emo.pojo.Emotion">
+        delete from emo.emotion
+        where id=#{id}
+    </delete>
+    <!--查看情绪小妙招-->
+    <select id="selectEmotion" resultType="com.emo.pojo.Emotion">
+       select * from emo.emotion
+        <where>
+            <if test="Keyword!=null">
+                and concat_ws(" ",title,concent) regexp #{Keyword}
+            </if>
+        </where>
+    limit #{page},#{limit}
+    </select>
+    <!--关键字查看情绪小妙招-->
+    <select id="selectWhereEmotion" resultType="com.emo.pojo.Emotion">
+        select * from emo.emotion
+    </select>
+</mapper>
